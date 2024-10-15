@@ -6,6 +6,8 @@ function App() {
     return (
         <div className="App">
             <h1>Pentago Game</h1>
+            <br />
+            <br />
             <GameBoard />
         </div>
     );

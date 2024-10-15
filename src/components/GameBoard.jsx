@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FaArrowRight, FaArrowDown, FaArrowLeft, FaArrowUp } from "react-icons/fa";
 
 const GameBoard = () => {
     const [board, setBoard] = useState([...Array(6)].map(() => Array(6).fill(0))); // Initialize a 6x6 board
@@ -186,28 +187,116 @@ const GameBoard = () => {
 
     return (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
+            {/* Top-Left Corner */}
+            <div style={{
+               position: 'absolute',
+               top: 205,
+               left: 490,
+               padding: '10px',
+               backgroundColor: 'black'
+            }}>
+                <FaArrowRight />
+            </div>
+
+            <div style={{
+                position: 'absolute',
+                top: 250,
+                left: 450,
+                padding: '10px',
+                backgroundColor: 'black'
+            }}>
+                <FaArrowDown />
+            </div>
+
+            {/* Top-Right Corner */}
+            <div style={{
+                position: 'absolute',
+                top: 205,
+                right: 510,
+                padding: '10px',
+                backgroundColor: 'black'
+            }}>
+                <FaArrowLeft />
+            </div>
+
+            {/* Top-Right Corner */}
+            <div style={{
+                position: 'absolute',
+                top: 250,
+                right: 470,
+                padding: '10px',
+                backgroundColor: 'black'
+            }}>
+                <FaArrowDown />
+            </div>
+
+            {/* Bottom-Left Corner */}
+            <div style={{
+                position: 'absolute',
+                bottom: 178,
+                left: 450,
+                padding: '10px',
+                backgroundColor: 'black'
+            }}>
+                <FaArrowUp />
+            </div>
+
+            {/* Bottom-Left Corner */}
+            <div style={{
+                position: 'absolute',
+                bottom: 130,
+                left: 490,
+                padding: '10px',
+                backgroundColor: 'black'
+            }}>
+                <FaArrowRight />
+            </div>
+
+            {/* Bottom-Right Corner */}
+            <div style={{
+                position: 'absolute',
+                bottom: 178,
+                right: 470,
+                padding: '10px',
+                backgroundColor: 'black'
+            }}>
+                <FaArrowUp />
+            </div>
+
+            {/* Bottom-Right Corner */}
+            <div style={{
+                position: 'absolute',
+                bottom: 130,
+                right: 510,
+                padding: '10px',
+                backgroundColor: 'black'
+            }}>
+                <FaArrowLeft/>
+            </div>
+
             <div style={{ marginRight: '20px' }}>
                 {board.map((row, rowIndex) => (
                     <div key={rowIndex} style={{ display: 'flex' }}>
                         {row.map((cell, colIndex) => (
                             <div
-                            key={colIndex}
-                            onClick={() => handleCellClick(rowIndex, colIndex)}
-                            style={{
-                                width: '50px',
-                                height: '50px',
-                                backgroundColor: selectedCell.row === rowIndex && selectedCell.col === colIndex ? 'lightblue' : 'lightgray', // Change background color if selected
-                                border: '1px solid black',
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                cursor: 'pointer',
-                                fontSize: '24px',
-                                fontWeight: 'bold',
-                            }}
-                        >
-                            {cell === 1 ? 'X' : cell === 2 ? 'O' : ''}
-                        </div>
+                                key={colIndex}
+                                onClick={() => handleCellClick(rowIndex, colIndex)}
+                                style={{
+                                    width: '50px',
+                                    height: '50px',
+                                    border: '1px solid black',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    cursor: 'pointer',
+                                    backgroundColor: selectedCell.row === rowIndex && selectedCell.col === colIndex ? 'lightyellow'
+                                        : cell === 0 ? 'white' // Empty cell 
+                                        : cell === 1 ? 'lightblue' // Player 1's piece
+                                        : 'lightcoral', // Player 2's piece
+                                }}
+                            >
+                                {cell === 1 ? 'X' : cell === 2 ? 'O' : ''}
+                            </div>
                         ))}
                     </div>
                 ))}
