@@ -7,11 +7,18 @@ const GameBoard = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [rotation, setRotation] = useState(0); // State for rotation value
     const [selectedCell, setSelectedCell] = useState({ row: null, col: null }); // State for selected cell
+    const [selectedRotation, setSelectedRotation] = useState(null);
 
     const handleCellClick = (row, col) => {
         setSelectedCell({ row, col }); // Set the selected cell
         setErrorMessage(''); // Clear any previous error message
     };
+
+    const handleArrowClick = (rotationValue) => {
+        setSelectedRotation(rotationValue); // Set the selected rotation
+        handleRotationChange({ target: { value: rotationValue } }); // Pass value to rotation handler
+    };
+
 
     const confirmMove = () => {
         const { row, col } = selectedCell;
@@ -187,25 +194,32 @@ const GameBoard = () => {
 
     return (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
-            {/* Top-Left Corner */}
+            {/* Top-Top-Left Corner */}
             <div style={{
                position: 'absolute',
                top: 205,
                left: 490,
                padding: '10px',
-               backgroundColor: 'black'
-            }}>
-                <FaArrowRight />
+               backgroundColor: 'transparent',
+               cursor: 'pointer'
+            }}
+            onClick={() => handleArrowClick(1)}
+            >
+                <FaArrowRight color={selectedRotation === 1 ? 'yellow' : 'white'} />
             </div>
 
+            {/* Top-Left-Left Corner */}
             <div style={{
                 position: 'absolute',
                 top: 250,
                 left: 450,
                 padding: '10px',
-                backgroundColor: 'black'
-            }}>
-                <FaArrowDown />
+                backgroundColor: 'transparent',
+                cursor: 'pointer'
+            }}
+            onClick={() => handleArrowClick(5)}
+            >
+                <FaArrowDown color={selectedRotation === 5 ? 'yellow' : 'white'} />
             </div>
 
             {/* Top-Right Corner */}
@@ -214,9 +228,12 @@ const GameBoard = () => {
                 top: 205,
                 right: 510,
                 padding: '10px',
-                backgroundColor: 'black'
-            }}>
-                <FaArrowLeft />
+                backgroundColor: 'transparent',
+                cursor: 'pointer'
+            }}
+            onClick={() => handleArrowClick(6)}
+            >
+                <FaArrowLeft color={selectedRotation === 6 ? 'yellow' : 'white'} />
             </div>
 
             {/* Top-Right Corner */}
@@ -225,9 +242,12 @@ const GameBoard = () => {
                 top: 250,
                 right: 470,
                 padding: '10px',
-                backgroundColor: 'black'
-            }}>
-                <FaArrowDown />
+                backgroundColor: 'transparent',
+                cursor: 'pointer'
+            }}
+            onClick={() => handleArrowClick(2)}
+            >
+                <FaArrowDown color={selectedRotation === 2 ? 'yellow' : 'white'} />
             </div>
 
             {/* Bottom-Left Corner */}
@@ -236,9 +256,12 @@ const GameBoard = () => {
                 bottom: 178,
                 left: 450,
                 padding: '10px',
-                backgroundColor: 'black'
-            }}>
-                <FaArrowUp />
+                backgroundColor: 'transparent',
+                cursor: 'pointer'
+            }}
+            onClick={() => handleArrowClick(3)}
+            >
+                <FaArrowUp color={selectedRotation === 3 ? 'yellow' : 'white'} />
             </div>
 
             {/* Bottom-Left Corner */}
@@ -247,9 +270,12 @@ const GameBoard = () => {
                 bottom: 130,
                 left: 490,
                 padding: '10px',
-                backgroundColor: 'black'
-            }}>
-                <FaArrowRight />
+                backgroundColor: 'transparent',
+                cursor: 'pointer'
+            }}
+            onClick={() => handleArrowClick(7)}
+            >
+                <FaArrowRight color={selectedRotation === 7 ? 'yellow' : 'white'} />
             </div>
 
             {/* Bottom-Right Corner */}
@@ -258,9 +284,12 @@ const GameBoard = () => {
                 bottom: 178,
                 right: 470,
                 padding: '10px',
-                backgroundColor: 'black'
-            }}>
-                <FaArrowUp />
+                backgroundColor: 'transparent',
+                cursor: 'pointer'
+            }}
+            onClick={() => handleArrowClick(8)}
+            >
+                <FaArrowUp color={selectedRotation === 8 ? 'yellow' : 'white'} />
             </div>
 
             {/* Bottom-Right Corner */}
@@ -269,9 +298,12 @@ const GameBoard = () => {
                 bottom: 130,
                 right: 510,
                 padding: '10px',
-                backgroundColor: 'black'
-            }}>
-                <FaArrowLeft/>
+                backgroundColor: 'transparent',
+                cursor: 'pointer'
+            }}
+            onClick={() => handleArrowClick(4)}
+            >
+                <FaArrowLeft color={selectedRotation === 4 ? 'yellow' : 'white'} />
             </div>
 
             <div style={{ marginRight: '20px' }}>
@@ -302,17 +334,8 @@ const GameBoard = () => {
                 ))}
                 {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
                 <div style={{ marginTop: '10px' }}>
-                    <input
-                        type="number"
-                        value={rotation}
-                        onChange={handleRotationChange}
-                        min="1"
-                        max="8"
-                        placeholder="Enter rotation (1-8)"
-                        style={{ marginRight: '5px' }}
-                    />
-                    <button onClick={confirmMove}>Confirm Move</button>
-                </div>
+                <button onClick={confirmMove}>Confirm Move</button>
+            </div>
                 <button onClick={resetBoard} style={{ marginTop: '10px' }}>Reset Game</button>
             </div>
         </div>
