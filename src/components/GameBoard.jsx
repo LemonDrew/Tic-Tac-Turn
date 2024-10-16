@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaArrowRight, FaArrowDown, FaArrowLeft, FaArrowUp } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 const GameBoard = () => {
     const [board, setBoard] = useState([...Array(6)].map(() => Array(6).fill(0))); // Initialize a 6x6 board
@@ -8,6 +9,12 @@ const GameBoard = () => {
     const [rotation, setRotation] = useState(0); // State for rotation value
     const [selectedCell, setSelectedCell] = useState({ row: null, col: null }); // State for selected cell
     const [selectedRotation, setSelectedRotation] = useState(null);
+
+    const navigate = useNavigate(); // Initialize the navigate function
+
+    const handleGoBack = () => {
+        navigate('/'); // Navigate to the home route
+    };
 
     const handleCellClick = (row, col) => {
         setSelectedCell({ row, col }); // Set the selected cell
@@ -205,7 +212,7 @@ const GameBoard = () => {
             }}
             onClick={() => handleArrowClick(1)}
             >
-                <FaArrowRight color={selectedRotation === 1 ? 'yellow' : 'white'} />
+                <FaArrowRight color={selectedRotation === 1 ? 'yellow' :  'black'} />
             </div>
 
             {/* Top-Left-Left Corner */}
@@ -219,7 +226,7 @@ const GameBoard = () => {
             }}
             onClick={() => handleArrowClick(5)}
             >
-                <FaArrowDown color={selectedRotation === 5 ? 'yellow' : 'white'} />
+                <FaArrowDown color={selectedRotation === 5 ? 'yellow' :  'black'} />
             </div>
 
             {/* Top-Right Corner */}
@@ -233,7 +240,7 @@ const GameBoard = () => {
             }}
             onClick={() => handleArrowClick(6)}
             >
-                <FaArrowLeft color={selectedRotation === 6 ? 'yellow' : 'white'} />
+                <FaArrowLeft color={selectedRotation === 6 ? 'yellow' :  'black'} />
             </div>
 
             {/* Top-Right Corner */}
@@ -247,7 +254,7 @@ const GameBoard = () => {
             }}
             onClick={() => handleArrowClick(2)}
             >
-                <FaArrowDown color={selectedRotation === 2 ? 'yellow' : 'white'} />
+                <FaArrowDown color={selectedRotation === 2 ? 'yellow' :  'black'} />
             </div>
 
             {/* Bottom-Left Corner */}
@@ -261,7 +268,7 @@ const GameBoard = () => {
             }}
             onClick={() => handleArrowClick(3)}
             >
-                <FaArrowUp color={selectedRotation === 3 ? 'yellow' : 'white'} />
+                <FaArrowUp color={selectedRotation === 3 ? 'yellow' : 'black'} />
             </div>
 
             {/* Bottom-Left Corner */}
@@ -275,7 +282,7 @@ const GameBoard = () => {
             }}
             onClick={() => handleArrowClick(7)}
             >
-                <FaArrowRight color={selectedRotation === 7 ? 'yellow' : 'white'} />
+                <FaArrowRight color={selectedRotation === 7 ? 'yellow' :  'black'} />
             </div>
 
             {/* Bottom-Right Corner */}
@@ -289,7 +296,7 @@ const GameBoard = () => {
             }}
             onClick={() => handleArrowClick(8)}
             >
-                <FaArrowUp color={selectedRotation === 8 ? 'yellow' : 'white'} />
+                <FaArrowUp color={selectedRotation === 8 ? 'yellow' :  'black'} />
             </div>
 
             {/* Bottom-Right Corner */}
@@ -303,7 +310,7 @@ const GameBoard = () => {
             }}
             onClick={() => handleArrowClick(4)}
             >
-                <FaArrowLeft color={selectedRotation === 4 ? 'yellow' : 'white'} />
+                <FaArrowLeft color={selectedRotation === 4 ? 'yellow' : 'black'} />
             </div>
 
             <div style={{ marginRight: '20px' }}>
@@ -336,7 +343,28 @@ const GameBoard = () => {
                 <div style={{ marginTop: '10px' }}>
                 <button onClick={confirmMove}>Confirm Move</button>
             </div>
-                <button onClick={resetBoard} style={{ marginTop: '10px' }}>Reset Game</button>
+            <button 
+                onClick={resetBoard} 
+                style={{ 
+                    marginTop: '10px', 
+                    backgroundColor: 'blue', // Set background color to blue
+                    color: '#fff', // White text
+                    border: 'none', // No border
+                    borderRadius: '5px', // Rounded corners
+                    padding: '10px', // Padding for better click area
+                    cursor: 'pointer' // Pointer cursor on hover
+                }}>Reset Game</button>
+                <div><br /><button onClick={handleGoBack} style={{ 
+                    marginTop: '10px', 
+                    backgroundColor: 'blue', // Set background color to blue
+                    color: '#fff', // White text
+                    border: 'none', // No border
+                    borderRadius: '5px', // Rounded corners
+                    padding: '10px', // Padding for better click area
+                    cursor: 'pointer' // Pointer cursor on hover
+                }}>
+                Go Back to Home
+                </button></div>
             </div>
         </div>
     );
